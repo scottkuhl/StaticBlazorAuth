@@ -1,6 +1,9 @@
 # Blazor Starter Application
 
-This template contains an example .NET 6 [Blazor WebAssembly](https://docs.microsoft.com/aspnet/core/blazor/?view=aspnetcore-6.0#blazor-webassembly) client application, a .NET 6 C# [Azure Functions](https://docs.microsoft.com/azure/azure-functions/functions-overview), and a C# class library with shared code.
+This template contains an example .NET 6 [Blazor WebAssembly](https://docs.microsoft.com/aspnet/core/blazor/?view=aspnetcore-6.0#blazor-webassembly) client application, a .NET 6 C# [Azure Functions](https://docs.microsoft.com/azure/azure-functions/functions-overview), and a C# class library with shared code that includes authentication.
+
+*Notes: Authentication examples were taken from [How to secure your C# API w/ Azure Static Web Apps [13 of 16] | Azure Tips and Tricks](https://www.youtube.com/watch?v=eZQq3zw3WL4).*
+*The ApiIsolated project does not have authentication implemented.*
 
 ## Getting Started
 
@@ -14,6 +17,10 @@ This template contains an example .NET 6 [Blazor WebAssembly](https://docs.micro
 
 Once you clone the project, open the solution in [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) and follow these steps:
 
+1. Install the [Azure Static Web Apps CLI](https://techcommunity.microsoft.com/t5/apps-on-azure-blog/introducing-the-azure-static-web-apps-cli/ba-p/2257581).
+
+1. Install the [Command Task Runner (64-bit)](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.CommandTaskRunner64) extension.
+
 1. Right-click on the solution and select **Set Startup Projects...**.
 
 1. Select **Multiple startup projects** and set the following actions for each project:
@@ -24,9 +31,17 @@ Once you clone the project, open the solution in [Visual Studio 2022](https://vi
 
 1. Press **F5** to launch both the client application and the Functions API app.
 
+Notes: `"launchUrl": "http://localhost:4280/",` has been added to the launchSettings.json client profile.
+A StaticWebApp.cmd file in the solution root with `swa start http://localhost:5000  --devserver-timeout=6000000` has been added.
+The commands.json file is setup to have the Command Task Runner launch the Azure Static Web App CLI when the project opens.
+This setup will allow you to add authentication and run it locally.
+
+*Optional: Setup Windows Terminal to close the process exits, fails or crashes instead of closing only when the process exits successfully.
+This will close the Azure Functions window when you stop debugging.*
+
 ### Visual Studio Code with Azure Static Web Apps CLI
 
-1. Install the [Azure Static Web Apps CLI](https://www.npmjs.com/package/@azure/static-web-apps-cli) and [Azure Functions Core Tools CLI](https://www.npmjs.com/package/azure-functions-core-tools).
+1. Install the [Azure Static Web Apps CLI](https://techcommunity.microsoft.com/t5/apps-on-azure-blog/introducing-the-azure-static-web-apps-cli/ba-p/2257581) and [Azure Functions Core Tools CLI](https://www.npmjs.com/package/azure-functions-core-tools).
 
 1. Open the folder in Visual Studio Code.
 

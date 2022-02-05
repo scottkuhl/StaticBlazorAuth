@@ -1,12 +1,12 @@
-using System;
-using System.Linq;
+using BlazorApp.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
-
-using BlazorApp.Shared;
+using System;
+using System.Linq;
+using System.Security.Claims;
 
 namespace BlazorApp.Api
 {
@@ -34,9 +34,16 @@ namespace BlazorApp.Api
 
         [FunctionName("WeatherForecast")]
         public static IActionResult Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
+            ILogger log,
+            ClaimsPrincipal principal)
         {
+            if (principal == null || !principal.Identity.IsAuthenticated)
+            {
+                log.LogWarning("Request was not authenticated");
+                return new BadRequestObjectResult("Request was not authenticated.");
+            }
+
             var randomNumber = new Random();
             var temp = 0;
 

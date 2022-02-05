@@ -1,6 +1,8 @@
 ﻿@page "/fetchdata"
 @using BlazorApp.Shared 
+@using Microsoft.AspNetCore.Authorization
 @inject HttpClient Http
+@attribute [Authorize]
 
 <h1>Weather forecast</h1>
 

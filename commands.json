@@ -1,0 +1,10 @@
+{
+  "commands": {
+    "StaticWebApp": {
+      "fileName": "cmd.exe",
+      "workingDirectory": ".",
+      "arguments": "/c StaticWebApp.cmd"
+    }
+  }
+, "-vs-binding":{"ProjectOpened":["StaticWebApp"]}
+}
